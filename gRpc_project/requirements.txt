@@ -1,0 +1,7 @@
+sqlalchemy>=2.0
+asyncpg
+grpcio
+grpcio-tools
+pytest
+pytest-asyncio
+python-dotenv

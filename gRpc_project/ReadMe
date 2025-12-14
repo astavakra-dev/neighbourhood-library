@@ -1,0 +1,14 @@
+1. Generate Python Stub
+python -m grpc_tools.protoc -I=proto --python_out=proto --grpc_python_out=proto proto/library_service.proto
+
+2. - Generate NodeJS stubs (for Express gateway):
+npx grpc-tools --proto_path=proto --js_out=import_style=commonjs,binary:proto --grpc_out=proto proto/library_service.proto
+
+3. pytest tests/ -v --asyncio-mode=auto
+
+4.
+$env:PYTHONPATH="."
+python server/app.py
+
+5. Run specific Test function
+python -m pytest tests/test_library.py::test_return_book -v

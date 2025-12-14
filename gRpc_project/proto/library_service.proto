@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package library.v1;
+
+// -------- Service definition --------
+service LibraryService {
+  rpc AddBook(AddBookRequest) returns (BookResponse);
+  rpc UpdateBook(UpdateBookRequest) returns (BookResponse);
+  rpc AddMember(AddMemberRequest) returns (MemberResponse);
+  rpc BorrowBook(BorrowBookRequest) returns (BorrowResponse);
+  rpc ReturnBook(ReturnBookRequest) returns (ReturnResponse);
+  rpc ListBorrowedBooks(BorrowListRequest) returns (BorrowListResponse);
+}
+
+// -------- Book messages --------
+message AddBookRequest {
+  string title = 1;
+  string author = 2;
+  int32 published_year = 3;
+}
+
+message UpdateBookRequest {
+  int32 id = 1;
+  string title = 2;
+  string author = 3;
+  int32 published_year = 4;
+}
+
+message BookResponse {
+  bool success = 1;
+  string message = 2;
+  int32 id = 3;
+}
+
+message Book {
+  int32 id = 1;
+  string title = 2;
+  string author = 3;
+  int32 published_year = 4;
+}
+
+// -------- Member messages --------
+message AddMemberRequest {
+  string name = 1;
+  string contact_no = 2;
+  string email = 3;
+}
+
+message MemberResponse {
+  bool success = 1;
+  string message = 2;
+  int32 id = 3;
+}
+
+// -------- Borrow messages --------
+message BorrowBookRequest {
+  int32 book_id = 1;
+  int32 member_id = 2;
+  string due_date = 3; // ISO-8601 string, optional
+}
+
+message BorrowResponse {
+  int32 record_id = 1;
+  string status = 2;
+}
+
+message ReturnBookRequest {
+  int32 book_id = 1;
+  int32 member_id = 2;
+}
+
+message ReturnResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message BorrowListRequest {
+  int32 member_id = 1;
+}
+
+message BorrowListResponse {
+  repeated Book books = 1;
+}
