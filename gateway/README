@@ -1,0 +1,4 @@
+Install dependencies : npm Install
+run dev server: npm run dev
+Run Tests : npm tests
+Run Integration tests:   npx jest tests/integration --verbose
